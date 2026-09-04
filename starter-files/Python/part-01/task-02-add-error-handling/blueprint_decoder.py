@@ -21,7 +21,11 @@ def decode_blueprint_safe(filename):
     # TODO: Add try-except to catch FileNotFoundError
     # TODO: If file doesn't exist, print error and return empty list
     # TODO: Otherwise, call decode_blueprint and return the secrets
-    pass
+    try:
+        return decode_blueprint(filename)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found.")
+        return []
 
 
 if __name__ == "__main__":

@@ -22,10 +22,12 @@ function decodeBlueprint(filename) {
 // Enhanced version with error handling
 // If file doesn't exist, return empty array and print error message
 function decodeBlueprintSafe(filename) {
-    // TODO: Add try-catch to handle file errors
-    // TODO: If file doesn't exist, print error and return empty array
-    // TODO: Otherwise, call decodeBlueprint and return secrets
-    return [];
+    try {
+        return decodeBlueprint(filename);
+    } catch (err) {
+        console.log(`Error: File '${filename}' not found.`);
+        return [];
+    }
 }
 
 // Test error handling
