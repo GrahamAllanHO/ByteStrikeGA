@@ -62,7 +62,30 @@ Part-06 materials reference pytest-based examples:
 pytest --cov=blueprint_decoder --cov-report=html
 ```
 
+### Java demo task example
+
+The repo now also contains a task-local Java demo project at `starter-files/Java/demo` with its own Maven setup:
+
+```bash
+cd 'starter-files/Java/demo'
+mvn test
+mvn -q exec:java
+```
+
 Do not assume any of these commands work from the repository root without adding the missing project scaffolding for the specific task you are working on.
+
+## Java demo structure
+
+The Java demo is a focused CLI example and is intentionally scoped to `starter-files/Java/demo` rather than the broader part-based workshop tree.
+
+- `pom.xml`: local Maven project with JUnit 5, Picocli, and `exec-maven-plugin`
+- `src/main/java/demo/Demo.java`: Picocli command entry point and orchestration only
+- `src/main/java/demo/BlueprintReader.java`: blueprint file discovery and secret extraction
+- `src/main/java/demo/SecretEntry.java`: parsed `label` / `value` model
+- `src/main/java/demo/SecretFormatter.java`: table layout and Picocli ANSI styling
+- `src/test/java/demo/*.java`: unit tests split by responsibility
+
+When editing this Java demo, preserve the single-responsibility split instead of collapsing logic back into one class unless the user explicitly asks for that simplification.
 
 ## Key conventions
 
@@ -72,6 +95,7 @@ Do not assume any of these commands work from the repository root without adding
   - Python uses snake_case filenames and functions.
   - C# uses PascalCase filenames and types.
   - JavaScript mixes `blueprint_decoder.js` with camelCase files such as `leagueMission.js` and may use either CommonJS or ESM depending on the exercise.
+  - Java follows standard Maven folder layout in `starter-files/Java/demo` and uses PascalCase class names.
 - Starter files are often TODO skeletons, while solution files may be complete code, partial artifacts, or README-only guidance depending on the part and language.
 - Part 4 and later are not perfectly symmetric across languages. Do not assume the same filenames, task names, or abstraction boundaries exist in JavaScript, Python, and C#.
 - Common exercise patterns across files are:
