@@ -2,13 +2,17 @@
   "name": "ByteStrike Dev Container",
   "image": "mcr.microsoft.com/devcontainers/universal:latest",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "lts"
+    }
   },
   "postCreateCommand": "gh --version && pip install github-copilot && npm install -g @github/copilot-sdk @github/spec-kit",
   "customizations": {
     "vscode": {
       "extensions": [
-        "GitHub.copilot"
+        "GitHub.copilot",
+        "vscjava.vscode-java-pack"
       ]
     }
   }
