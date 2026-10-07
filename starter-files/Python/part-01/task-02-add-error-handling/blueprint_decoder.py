@@ -21,10 +21,28 @@ def decode_blueprint_safe(filename):
     # TODO: Add try-except to catch FileNotFoundError
     # TODO: If file doesn't exist, print error and return empty list
     # TODO: Otherwise, call decode_blueprint and return the secrets
+    
+    # Validate filename is not empty or None
+    if not filename or not isinstance(filename, str):
+        print(f"Error: Invalid filename. Must be a non-empty string.")
+        return []
+    
     try:
         return decode_blueprint(filename)
     except FileNotFoundError:
         print(f"Error: File '{filename}' not found.")
+        return []
+    except IsADirectoryError:
+        print(f"Error: '{filename}' is a directory, not a file.")
+        return []
+    except PermissionError:
+        print(f"Error: Permission denied reading file '{filename}'.")
+        return []
+    except UnicodeDecodeError:
+        print(f"Error: Unable to read file '{filename}' - encoding issue.")
+        return []
+    except Exception as e:
+        print(f"Error: Unexpected error reading file '{filename}': {type(e).__name__}")
         return []
 
 

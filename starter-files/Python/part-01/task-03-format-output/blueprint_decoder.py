@@ -1,4 +1,5 @@
 import re
+from collections import Counter
 
 COLOR_PALETTE = [
     "\033[91m",  # Bright red
@@ -35,6 +36,7 @@ def display_secrets_report(secrets):
     """
     separator = "=" * 50
     category_colors = {}
+    category_counts = Counter()
 
     print("\n" + separator)
     print("🔐 DECODED SECRETS REPORT".center(50))
@@ -43,12 +45,21 @@ def display_secrets_report(secrets):
 
     for index, secret in enumerate(secrets, 1):
         category, display_text = categorize_secret(secret)
+        category_counts[category] += 1
         if category not in category_colors:
             color_index = len(category_colors) % len(COLOR_PALETTE)
             category_colors[category] = COLOR_PALETTE[color_index]
 
         color = category_colors[category]
         print(f"{color}  [{index:2d}] [{category}] {BOLD}{display_text}{COLOR_RESET}")
+
+    print("\n" + separator)
+    print("📊 SUMMARY REPORT".center(50))
+    print(separator)
+    print(f"{BOLD}Total secrets: {len(secrets)}{COLOR_RESET}\n")
+    for category, count in sorted(category_counts.items()):
+        color = category_colors[category]
+        print(f"{color}  [{category}] {BOLD}{count}{COLOR_RESET}")
 
     print("\n" + separator + "\n")
 
