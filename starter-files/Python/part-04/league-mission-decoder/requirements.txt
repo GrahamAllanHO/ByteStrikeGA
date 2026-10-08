@@ -1,0 +1,18 @@
+# League Mission Decoder Dependencies
+
+# Core
+# (stdlib only for decoder.py and cli.py)
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
+
+# Linting & Code Quality
+flake8>=6.0.0
+black>=23.0.0
+pylint>=2.0.0
+bandit>=1.7.0
+safety>=2.0.0
+
+# Optional: for better HTTP handling
+requests>=2.28.0
